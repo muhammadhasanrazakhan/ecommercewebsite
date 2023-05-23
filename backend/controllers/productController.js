@@ -2,22 +2,27 @@ const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler")
 const catchAsyncErrors = require("../middleware/catchAsyncErrors")
 const ApiFeatures = require("../utils/apifeatures");
-const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary").v2;
 
 // create Product
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   let images = [];
-
+console.log(req.body.images)
   if (typeof req.body.images === "string") {
     images.push(req.body.images);
   } else {
     images = req.body.images;
   }
-
+  const opts = {
+    overwrite: true,
+    invalidate: true,
+    resource_type: "auto",
+  };
   const imagesLinks = [];
 
   for (let i = 0; i < images.length; i++) {
-    const result = await cloudinary.v2.uploader.upload(images[i], {
+    //let img = images[i].toString()
+    const result = await cloudinary.uploader.upload(images[i], {
       folder: "products",
     });
 
@@ -37,6 +42,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
         product
     })
 });
+
 
 
 // Get All Products
@@ -99,13 +105,13 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   if (images !== undefined) {
     // Deleting Images From Cloudinary
     for (let i = 0; i < product.images.length; i++) {
-      await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+      await cloudinary.uploader.destroy(product.images[i].public_id);
     }
 
     const imagesLinks = [];
 
     for (let i = 0; i < images.length; i++) {
-      const result = await cloudinary.v2.uploader.upload(images[i], {
+      const result = await cloudinary.uploader.upload(images[i], {
         folder: "products",
       });
 
@@ -137,7 +143,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
     }
 
     for (let i = 0; i < product.images.length; i++) {
-      await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+      await cloudinary.uploader.destroy(product.images[i].public_id);
     }
 
     await product.deleteOne(); 

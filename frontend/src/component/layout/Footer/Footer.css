@@ -17,6 +17,7 @@ footer {
   .leftFooter > h4 {
     font-family: "Roboto";
     font-size: 1vmax;
+    margin-bottom: 15px;
   }
   .leftFooter > p {
     text-align: center;
@@ -26,7 +27,7 @@ footer {
   }
   .leftFooter > img {
     width: 10vmax;
-    margin: 1vmax;
+    margin: 0.2vmax;
     cursor: pointer;
   }
   
@@ -71,5 +72,47 @@ footer {
   }
   
   .rightFooter > a:hover {
-    color: #eb4034;
+    color: rgba(255, 180, 150, 1)
   }
+
+  @media (max-width: 520px) {
+  Footer {
+    flex-direction: column;
+  }
+  .leftFooter {
+     width:100%;
+     margin-bottom: 30px;
+  }
+  .leftFooter > h4 {
+    font-family: "Roboto";
+    font-size: 2.4vmax;
+    margin-bottom: 15px;
+  }
+
+  .leftFooter > img {
+    width: 17vmax;
+  }
+  .midFooter {
+    width:100%;
+    margin-bottom: 30px;
+ }
+ .midFooter > h1 {
+  font-size: 5.5vmax;
+}
+.midFooter > p {
+  max-width: 80%;
+  margin: 0.8vmax auto;
+  font-size: 2vmax;
+}
+ .rightFooter {
+    width:100%;
+    margin-bottom: 30px;
+}
+.rightFooter > h4 {
+  font-size: 2vmax;
+}
+.rightFooter > a {
+  font-size: 1.8vmax;
+  margin: 0.5vmax;
+}
+}

@@ -65,6 +65,7 @@ const NewProduct = () => {
     images.forEach((image) => {
       myForm.append("images", image);
     });
+    console.log("images", images)
     dispatch(createProduct(myForm));
   };
 

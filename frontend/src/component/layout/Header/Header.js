@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import { BsSearch } from 'react-icons/bs';
 import { BsFillFilePersonFill } from 'react-icons/bs';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { IoMdArrowDropdown } from 'react-icons/io';
 import "./Header.css";
 import UserOptions from "./UserOptions";
 //import store from "../../../store";
@@ -89,6 +90,7 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const [showMediaIcons, setShowMediaIcons] = useState(false);
+  const [showDropDown, setShowDropDown] = useState(false);
   const [navbar, setNavbar] = useState(false)
   
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -100,11 +102,22 @@ const Header = () => {
       setNavbar(false);
     }
   }
+  const handleDropDown = () => {
+    setShowMediaIcons(false)
+    setShowDropDown(false)
+  } 
   window.addEventListener("scroll", changeBackground)
 
   return (
   <>
       <nav className={navbar ? 'main-nav active' : 'main-nav'}>
+        {/* hamburget menu start  */}
+        <div className="hamburger-menu">
+            <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
+              <GiHamburgerMenu style={{color:"rgba(255,180,150,0.8)" }}/>
+            </a>
+          </div>
+        
         {/* 1st logo part  */}
         <div className="logo">
           <h2>
@@ -115,22 +128,50 @@ const Header = () => {
         {/* 2nd menu part  */}
         <div
           className={
-            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+            showMediaIcons ? "menu-link mobile-menu-link active" : "menu-link"
           }>
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" onClick={() => setShowMediaIcons(false)}>Home</NavLink>
             </li>
             <li>
-              <NavLink to="/products?keyword=${keyword}">Products</NavLink>
+              <NavLink to="/products?keyword=${keyword}" onClick={() => setShowMediaIcons(false)}>Products</NavLink>
             </li>
             <li>
-              <NavLink to="/contact">Contact</NavLink>
+              <NavLink to="/contact" onClick={() => setShowMediaIcons(false)}>Contact</NavLink>
             </li>
             <li>
-              <NavLink to="/about">About</NavLink>
+              <NavLink to="/about" onClick={() => setShowMediaIcons(false)}>About</NavLink>
             </li>
+            {showMediaIcons && (
+              <li>
+                <div style={{color: "rgba(255, 180, 150, 0.8)"}}onClick={() => setShowDropDown(!showDropDown)}>Others <IoMdArrowDropdown className="dropicon" fontSize={12}/></div>
+              </li>
+            )}
+
+            <div
+            className={
+              showDropDown ? "others active" : "others"
+            }>
+            <ul>
+              <li>
+                <NavLink to="/search" onClick={handleDropDown}><BsSearch fontSize={12}/> Search</NavLink>
+              </li>
+              <li>
+                <NavLink to="/login" onClick={handleDropDown}><BsFillFilePersonFill className="login" fontSize={12}/> Account</NavLink>
+              </li>
+              <li>
+                <NavLink to="/cart" onClick={handleDropDown}><AiOutlineShoppingCart className="cart" fontSize={12}/> Cart</NavLink>
+              </li>
+            </ul>
+            </div>
+
+            
+
+            
           </ul>
+
+
         </div>
 
 
@@ -165,12 +206,7 @@ const Header = () => {
             </li> */}
         </ul>
 
-          {/* hamburget menu start  */}
-          <div className="hamburger-menu">
-            <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
-              <GiHamburgerMenu style={{color:"rgba(255,180,150,0.8)"}}/>
-            </a>
-          </div>
+
         </div> 
       </nav>
 

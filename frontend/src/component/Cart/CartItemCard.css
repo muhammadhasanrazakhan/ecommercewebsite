@@ -34,15 +34,15 @@
   
   @media screen and (max-width: 600px) {
     .CartItemCard {
-      padding: 3vmax;
+      padding: 1vmax;
       height: 25vmax;
     }
     .CartItemCard > img {
-      width: 10vmax;
+      width: 12vmax;
     }
   
     .CartItemCard > div {
-      margin: 1vmax 2vmax;
+      margin: 3vmax 1vmax;
     }
   
     .CartItemCard > div > a {
@@ -50,10 +50,10 @@
     }
   
     .CartItemCard > div > span {
-      font: 300 1.9vmax "Roboto";
+      font: 300 1.3vmax "Roboto";
     }
   
     .CartItemCard > div > p {
-      font: 100 1.8vmax "Roboto";
+      font: 100 1.2vmax "Roboto";
     }
   }
