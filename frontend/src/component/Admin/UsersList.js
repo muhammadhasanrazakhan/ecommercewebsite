@@ -12,6 +12,7 @@ import SideBar from "./Sidebar";
 import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
 import { DELETE_USER_RESET } from "../../constants/userConstants";
 import { useNavigate } from "react-router-dom";
+import Loader from "../layout/Loader/Loader";
 
 const UsersList = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const UsersList = () => {
 
   const alert = useAlert();
 
-  const { error, users } = useSelector((state) => state.allUsers);
+  const { error, users, loading } = useSelector((state) => state.allUsers);
 
   const {
     error: deleteError,
@@ -125,6 +126,9 @@ const UsersList = () => {
 
       <div className="dashboard">
         <SideBar />
+        {loading ? (
+          <Loader/>
+        ) : (
         <div className="productListContainer">
           <h1 id="productListHeading">ALL USERS</h1>
 
@@ -137,6 +141,7 @@ const UsersList = () => {
             autoHeight
           />
         </div>
+        )}
       </div>
     </Fragment>
   );

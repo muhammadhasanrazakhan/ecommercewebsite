@@ -22,7 +22,7 @@
   .profileContainer > div:first-child > h1 {
     color: rgba(0, 0, 0, 0.555);
     font: 500 2.2vmax "Roboto";
-    transform: translateX(-10vmax) translateY(-2vmax);
+    transform: translateX(0vmax) translateY(-2vmax);
   }
   
   .profileContainer > div:first-child > img {
@@ -95,7 +95,18 @@
   @media screen and (max-width: 600px) {
     .profileContainer {
       flex-direction: column;
+      top:10%;
+      height:94vh;
     }
+  .profileContainer > div {
+    margin-top:0px;
+    margin-bottom:0px
+  }
+  .profileContainer > div:first-child > img {
+    width: 16vmax;
+    border-radius: 100%;
+    transition: all 0.5s;
+  }
   
     .profileContainer > div:first-child > h1 {
       font: 500 3.2vmax "Roboto";

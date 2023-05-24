@@ -109,7 +109,13 @@
   .updateProfileBtn:hover {
     background-color: rgb(179, 66, 46);
   }
-  
+
+  @media screen and (max-width: 998px) {
+    .updateProfileBox {
+      width: 45vw;
+      height: 60vh;
+    }
+  }
   @media screen and (max-width: 600px) {
     .updateProfileContainer {
       background-color: white;
@@ -117,6 +123,7 @@
     .updateProfileBox {
       width: 100vw;
       height: 95vh;
+      margin-top: 100px;
     }
   
     .updateProfileForm {

@@ -78,7 +78,14 @@
   .shippingBtn:hover {
     background-color: rgb(179, 66, 46);
   }
-  
+
+  @media screen and (max-width: 998px) {
+    .shippingBox {
+      width: 35vw;
+      height: 75vh;
+    }
+  }
+
   @media screen and (max-width: 600px) {
     .shippingBox {
       width: 100vw;

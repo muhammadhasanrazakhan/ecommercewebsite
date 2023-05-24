@@ -16,6 +16,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
 import { useNavigate } from "react-router-dom";
+import Loader from "../layout/Loader/Loader";
 
 
 const ProductList = () => {
@@ -23,7 +24,7 @@ const ProductList = () => {
   const navigate = useNavigate(); 
   const alert = useAlert();
 
-  const {  error, products } = useSelector((state) => state.products);
+  const {  error, products, loading } = useSelector((state) => state.products);
 
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.product
@@ -120,25 +121,26 @@ const ProductList = () => {
   return (
     <Fragment>
       <MetaData title={`ALL PRODUCTS - Admin`} />
-
+    
       <div className="dashboard">
         <SideBar />
-
+        {loading ? (
+        <Loader/> 
+        ) : ( 
         <div className="productListContainer">
           <h1 id="productListHeading">ALL PRODUCTS</h1>
 
 
-      
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={20}
+            pageSize={10}
             disableSelectionOnClick
             className="productListTable"
             autoHeight
           />
         </div>
-        
+      )}
       </div>
     </Fragment>
   );

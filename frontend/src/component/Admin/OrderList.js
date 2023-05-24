@@ -16,13 +16,14 @@ import {
 } from "../../actions/orderAction";
 import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 import { useNavigate } from "react-router-dom";
+import Loader from "../layout/Loader/Loader";
 
 const OrderList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
 
-  const { error, orders } = useSelector((state) => state.allOrders);
+  const { error, orders, loading } = useSelector((state) => state.allOrders);
 
   const { error: deleteError, isDeleted } = useSelector((state) => state.order);
 
@@ -125,6 +126,9 @@ const OrderList = () => {
 
       <div className="dashboard">
         <SideBar />
+        {loading ? (
+          <Loader/>
+        ) : (
         <div className="productListContainer">
           <h1 id="productListHeading">ALL ORDERS</h1>
 
@@ -137,6 +141,7 @@ const OrderList = () => {
             autoHeight
           />
         </div>
+        )}
       </div>
     </Fragment>
   );

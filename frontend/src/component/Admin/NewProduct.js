@@ -65,7 +65,8 @@ const NewProduct = () => {
     images.forEach((image) => {
       myForm.append("images", image);
     });
-    console.log("images", images)
+    const imagesField = myForm.getAll("images");
+    console.log(imagesField); 
     dispatch(createProduct(myForm));
   };
 
@@ -86,6 +87,11 @@ const NewProduct = () => {
       };
 
       reader.readAsDataURL(file);
+      // reader.readAsDataURL(file);
+
+      // reader.onload = () => {
+      //   resolve(reader.result);
+      // };
     });
   };
 

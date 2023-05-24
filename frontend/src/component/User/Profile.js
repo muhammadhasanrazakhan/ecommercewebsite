@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();
-
+  //console.log(user.avatar.url)
   useEffect(() => {
     if (isAuthenticated === false) {
       navigate("/login");
@@ -25,7 +25,12 @@ const Profile = () => {
           <div className="profileContainer">
             <div>
               <h1>My Profile</h1>
-              <img src={user.avatar.url} alt={user.name} />
+              {/* <img src={user.avatar.url} alt={user.name} /> */}
+              {user.avatar && user.avatar.url ? (
+                <img src={user.avatar.url} alt={user.name} />
+              ) : (
+                <div>No avatar available</div>
+              )}
               <Link to="/me/update">Edit Profile</Link>
             </div>
             <div>

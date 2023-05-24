@@ -5,13 +5,13 @@
   }
   
   .speedDialIcon {
-    width: 56px;
-    height: 56px;
+    width: 54px;
+    height: 54px;
     border-radius: 100%;
   }
   button.MuiButtonBase-root.MuiFab-root.MuiSpeedDial-fab.MuiFab-primary {
-    width: 56px;
-    height: 56px;
+    width: 54px;
+    height: 54px;
     background-color: transparent;
 }
 
@@ -182,12 +182,12 @@
   /* responsive css style  */
   @media (max-width: 1080px) {
     .speedDialIcon {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
     }
     button.MuiButtonBase-root.MuiFab-root.MuiSpeedDial-fab.MuiFab-primary {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
   }
     .main-nav {
       height: 8rem;
@@ -341,12 +341,12 @@
   
   @media (max-width: 520px) {
     .speedDialIcon {
-      width: 45px;
-      height: 45px;
+      width: 42px;
+      height: 42px;
     }
     button.MuiButtonBase-root.MuiFab-root.MuiSpeedDial-fab.MuiFab-primary {
-      width: 45px;
-      height: 45px;
+      width: 42px;
+      height: 42px;
   }
 
     .main-nav {
@@ -379,5 +379,10 @@
       font-size: 2.2rem;
       margin-top:35%;
       margin-left:20%
+    }
+  }
+  @media (max-width: 280px) {
+    .logo h2 {
+      font-size: 1.5rem;
     }
   }

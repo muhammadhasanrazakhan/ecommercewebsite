@@ -132,16 +132,16 @@ const Header = () => {
           }>
           <ul>
             <li>
-              <NavLink to="/" onClick={() => setShowMediaIcons(false)}>Home</NavLink>
+              <NavLink to="/" onClick={handleDropDown}>Home</NavLink>
             </li>
             <li>
-              <NavLink to="/products?keyword=${keyword}" onClick={() => setShowMediaIcons(false)}>Products</NavLink>
+              <NavLink to="/products?keyword=${keyword}" onClick={handleDropDown}>Products</NavLink>
             </li>
             <li>
-              <NavLink to="/contact" onClick={() => setShowMediaIcons(false)}>Contact</NavLink>
+              <NavLink to="/contact" onClick={handleDropDown}>Contact</NavLink>
             </li>
             <li>
-              <NavLink to="/about" onClick={() => setShowMediaIcons(false)}>About</NavLink>
+              <NavLink to="/about" onClick={handleDropDown}>About</NavLink>
             </li>
             {showMediaIcons && (
               <li>

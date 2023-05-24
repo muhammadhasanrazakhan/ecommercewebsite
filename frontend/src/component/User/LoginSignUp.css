@@ -159,6 +159,14 @@
     transform: translateX(100%);
   }
   
+  @media screen and (max-width: 998px) {
+    .LoginSignUpBox {
+      width: 45vw;
+      height: 60vh;
+    }
+  }
+
+
   @media screen and (max-width: 600px) {
     .LoginSignUpContainer {
       background-color: white;
@@ -166,6 +174,7 @@
     .LoginSignUpBox {
       width: 100vw;
       height: 95vh;
+      margin-top:100px;
     }
     .login_signUp_toggle {
       height: 5vmax;

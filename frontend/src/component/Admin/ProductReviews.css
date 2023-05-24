@@ -52,11 +52,12 @@
       border-top: 1px solid rgba(0, 0, 0, 0.158);
     }
     .productReviewsForm > div > input {
-      padding: 2.5vmax 5vmax;
-      font: 300 1.7vmax cursive;
+      padding: 2.5vmax 3vmax;
+      font: 300 1.1vmax cursive;
+      width: 18vmax;
     }
   
     .productReviewsForm > div > svg {
-      font-size: 2.8vmax;
+      font-size: 1.8vmax;
     }
   }
