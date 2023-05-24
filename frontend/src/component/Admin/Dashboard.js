@@ -20,6 +20,7 @@ import { getAdminProduct } from "../../actions/productAction";
 import { getAllOrders } from "../../actions/orderAction.js";
 import { getAllUsers } from "../../actions/userAction.js";
 import MetaData from "../layout/MetaData";
+import Loader from "../layout/Loader/Loader";
 
 ChartJS.register(
   CategoryScale,
@@ -34,7 +35,7 @@ ChartJS.register(
 const Dashboard = () => {
   const dispatch = useDispatch();
 
-  const { products } = useSelector((state) => state.products);
+  const { products, loading } = useSelector((state) => state.products);
 
   const { orders } = useSelector((state) => state.allOrders);
 
@@ -89,7 +90,9 @@ const Dashboard = () => {
     <div className="dashboard">
       <MetaData title="Dashboard - Admin Panel" />
       <Sidebar />
-
+      {loading ? (
+        <Loader/>
+      ) : (      
       <div className="dashboardContainer">
          <Typography component="h1">Dashboard</Typography>
 
@@ -123,6 +126,7 @@ const Dashboard = () => {
           <Doughnut data={doughnutState} />
         </div>
       </div>
+      )}
     </div>
   );
 };
