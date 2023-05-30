@@ -22,6 +22,7 @@ const UpdateProfile = () => {
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
+  const MAX_IMAGE_SIZE = 0.5 * 1024 * 1024;
 
   const updateProfileSubmit = (e) => {
     e.preventDefault();
@@ -34,17 +35,67 @@ const UpdateProfile = () => {
     dispatch(updateProfile(myForm));
   };
 
+
   const updateProfileDataChange = (e) => {
+      const file = e.target.files[0];
+      if (file.size > MAX_IMAGE_SIZE) {
+        // Compress the image
+        compressImage(file);
+      } else {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatarPreview(reader.result);
+          setAvatar(reader.result);
+        }
+      };      
+    
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
+  const compressImage = (file) => {
     const reader = new FileReader();
-
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setAvatarPreview(reader.result);
-        setAvatar(reader.result);
-      }
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+  
+        // Set the canvas dimensions to the compressed image size
+        const MAX_WIDTH = 400; // Maximum width of the compressed image
+        const MAX_HEIGHT = 400; // Maximum height of the compressed image
+        let width = img.width;
+        let height = img.height;
+  
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+  
+        canvas.width = width;
+        canvas.height = height;
+  
+        // Compress the image onto the canvas
+        ctx.drawImage(img, 0, 0, width, height);
+  
+        // Convert the compressed image to base64 string
+        const compressedDataUrl = canvas.toDataURL(file.type);
+        setAvatarPreview(compressedDataUrl);
+        setAvatar(compressedDataUrl);
+      };
+  
+      img.src = event.target.result;
     };
-
-    reader.readAsDataURL(e.target.files[0]);
+  
+    reader.readAsDataURL(file);
   };
 
   useEffect(() => {

@@ -19,6 +19,7 @@ const NewProduct = () => {
   const alert = useAlert();
   const navigate = useNavigate()
   const { loading, error, success } = useSelector((state) => state.newProduct);
+  const MAX_IMAGE_SIZE = 0.5 * 1024 * 1024;
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -37,6 +38,50 @@ const NewProduct = () => {
     "Camera",
     "SmartPhones",
   ];
+
+  const compressImage = (file) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+  
+        // Set the canvas dimensions to the compressed image size
+        const MAX_WIDTH = 400; // Maximum width of the compressed image
+        const MAX_HEIGHT = 400; // Maximum height of the compressed image
+        let width = img.width;
+        let height = img.height;
+  
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+  
+        canvas.width = width;
+        canvas.height = height;
+  
+        // Compress the image onto the canvas
+        ctx.drawImage(img, 0, 0, width, height);
+  
+        // Convert the compressed image to base64 string
+        const compressedDataUrl = canvas.toDataURL(file.type);
+        setImagesPreview((old) => [...old, compressedDataUrl]);
+        setImages((old) => [...old, compressedDataUrl]);
+      };
+  
+      img.src = event.target.result;
+    };
+  
+    reader.readAsDataURL(file);
+  };
 
   useEffect(() => {
     if (error) {
@@ -65,8 +110,6 @@ const NewProduct = () => {
     images.forEach((image) => {
       myForm.append("images", image);
     });
-    const imagesField = myForm.getAll("images");
-    console.log(imagesField); 
     dispatch(createProduct(myForm));
   };
 
@@ -77,6 +120,10 @@ const NewProduct = () => {
     setImagesPreview([]);
 
     files.forEach((file) => {
+      if (file.size > MAX_IMAGE_SIZE) {
+        // Compress the image
+        compressImage(file);
+      } else { 
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -87,11 +134,7 @@ const NewProduct = () => {
       };
 
       reader.readAsDataURL(file);
-      // reader.readAsDataURL(file);
-
-      // reader.onload = () => {
-      //   resolve(reader.result);
-      // };
+    }
     });
   };
 
